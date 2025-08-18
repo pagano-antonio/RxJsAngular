@@ -1,0 +1,26 @@
+<h2>Subject</h2>
+<p>Broadcast in tempo reale: i nuovi subscriber <strong>NON</strong> ricevono i messaggi passati.</p>
+
+<div class="row">
+    <input type="text" placeholder="Messaggio" [(ngModel)]="text" (keyup.enter)="send()" />
+    <button (click)="send()">Invia</button>
+    <button (click)="addLateReceiver()" [disabled]="lateReceiver">
+        Aggiungi receiver tardivo
+    </button>
+</div>
+
+<h3>Receiver #1 (attivo da subito)</h3>
+<ul>
+    @for (m of list1; track $index) {
+    <li>{{ m }}</li>
+    }
+</ul>
+
+@if (lateReceiver) {
+<h3>Receiver #2 (si abbona ora)</h3>
+<ul>
+    @for (m of list2; track $index) {
+    <li>{{ m }}</li>
+    }
+</ul>
+}

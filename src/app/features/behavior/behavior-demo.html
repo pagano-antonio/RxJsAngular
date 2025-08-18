@@ -1,0 +1,22 @@
+<h2>Demo BehaviorSubject</h2>
+
+<button (click)="increment()">Incrementa</button>
+<button (click)="subscribeLate()" [disabled]="lateSubscribed">
+    Abbonati in ritardo
+</button>
+
+<div style="display:flex; gap:30px; margin-top:20px;">
+    <div>
+        <h3>Subscriber 1</h3>
+        <ul>
+            <li *ngFor="let v of list1">{{ v }}</li>
+        </ul>
+    </div>
+
+    <div>
+        <h3>Subscriber 2 (tardivo)</h3>
+        <ul>
+            <li *ngFor="let v of list2">{{ v }}</li>
+        </ul>
+    </div>
+</div>
