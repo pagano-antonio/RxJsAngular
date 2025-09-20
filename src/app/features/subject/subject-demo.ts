@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Subject, scan } from 'rxjs';
+import { Subject, of, scan } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -12,25 +12,66 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./subject-demo.scss']
 })
 export class SubjectDemo {
-  // il nostro "bus di messaggi" per trasmettere stringhe ai subscriber
+
+
+
+
+
+
+
+
+
+
   private bus$ = new Subject<string>();
 
-  // riferimento al ciclo di vita, usato per fermare sottoscrizioni
   private destroyRef = inject(DestroyRef);
 
-  // testo attuale nell’input
   text = '';
 
-  // messaggi ricevuti dal primo subscriber
   list1: string[] = [];
 
-  // messaggi ricevuti dal secondo subscriber (quello tardivo)
   list2: string[] = [];
 
-  // semplice variabile booleana per gestire il secondo subscriber
   lateReceiver = false;
 
   constructor() {
+    /*
+        //1 esempio
+        const subject = new Subject<number>();
+    
+        subject.subscribe(val => console.log('A:', val));
+    
+        subject.next(1); // A: 1
+        subject.next(2); // A: 2
+    
+        subject.subscribe(val => console.log('B:', val)); // B non riceve 1 e 2
+    
+        subject.next(3); // A: 3, B: 3
+    */
+
+    /*
+        //1 esempio scan
+        of(1, 2, 3).pipe(
+          scan((acc, val) => acc + val, 0)   
+        ).subscribe(console.log);
+    */
+
+    /*
+    // Esempio 2: senza seed
+    of(1, 2, 3).pipe(
+      scan((acc, val) => acc + val)      // parte da 1 (primo valore)
+    ).subscribe(console.log);
+*/
+
+    /*
+        //Esempio 3
+        of('a', 'b', 'c').pipe(
+          scan((acc, val) => [...acc, val], [] as string[])
+        ).subscribe(console.log);
+    */
+
+
+    /// esempio COMPLETO
     // Receiver #1: si iscrive subito
     this.bus$
       .pipe(
